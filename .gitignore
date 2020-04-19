@@ -17,3 +17,8 @@ misc
 *.pyc
 **/venv
 
+#####################
+# Other directories #
+#####################
+**/Help_Links
+**/Course
