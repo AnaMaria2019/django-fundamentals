@@ -23,3 +23,20 @@ def game_detail(request, id):
         context['form'] = MoveForm()
 
     return render(request, 'gameplay/game_detail.html', context)
+
+
+@login_required
+def make_move(request, id):
+    game = get_object_or_404(Game, pk=id)
+
+    if not game.is_users_move(request.user):
+        raise PermissionDenied
+
+    move = game.new_move()
+    form = MoveForm(instance=move, data=request.POST)
+
+    if form.is_valid():
+        move.save()
+        return redirect("game_detail", id)
+    else:
+        return render(request, "gameplay/game_detail.html", {'game': game, 'form': form})
