@@ -85,8 +85,3 @@ class SignUpView(CreateView):  # 'CreateView' is a generic class view that uses 
     form_class = UserCreationForm
     template_name = "player/signup_form.html"
     success_url = reverse_lazy('player_home')
-
-    """def form_valid(self, form):
-        data = form.cleaned_data
-        user = User.objects.create_user(username=data['username'], password=data['password1'])
-        return redirect('player_home') """
