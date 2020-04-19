@@ -31,8 +31,9 @@ def home(request):
     """
     my_games = Game.objects.games_for_user(request.user)
     active_games = my_games.active()  # Here we select all the games of the logged in user that are not finished yet.
+    finished_games = my_games.difference(active_games)
     invitations = request.user.invitations_received.all()
-    return render(request, 'player/home.html', {'active_games': active_games, 'invitations': invitations})
+    return render(request, 'player/home.html', {'active_games': active_games, 'finished_games': finished_games, 'invitations': invitations})
 
 
 @login_required
