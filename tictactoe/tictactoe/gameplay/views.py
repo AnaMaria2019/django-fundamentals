@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.views.generic.list import ListView
 
 from .models import Game
 from .forms import MoveForm
@@ -9,7 +10,7 @@ from .forms import MoveForm
 def welcome(request):
     if request.user.is_authenticated:
         return redirect('player_home')  # 'player_home' is the name of the url where we want to redirect the user.
-        # In this case the url is '' located in 'player.urls'.
+        # In this case the url is 'home' located in 'player.urls'.
     else:
         return render(request, 'tictactoe/welcome.html')
 
@@ -40,3 +41,7 @@ def make_move(request, id):
         return redirect("game_detail", id)
     else:
         return render(request, "gameplay/game_detail.html", {'game': game, 'form': form})
+
+
+class AllGamesList(ListView):
+    model = Game
