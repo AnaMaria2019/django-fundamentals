@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your models here.
 
@@ -10,6 +11,22 @@ GAME_STATUS_CHOICES = (
     ('L', 'Second player wins'),
     ('D', 'Draw')
 )
+
+# A QuerySet represents a collection of objects from the database.
+# We create our own QuerySet which will also be able to call functions like 'filter', 'exclude' etc on it.
+
+
+class GamesQuerySet(models.QuerySet):
+    def games_for_user(self, user):
+        return self.filter(
+            Q(first_player=user) | Q(second_player=user)
+            # This returns all the games where the logged in user is either the first player, or the second player.
+        )
+
+    def active(self):
+        return self.filter(
+            Q(status='F') | Q(status='S')
+        )
 
 
 class Game(models.Model):
@@ -25,6 +42,12 @@ class Game(models.Model):
     last_active = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, default='F', choices=GAME_STATUS_CHOICES)
     # 'choices = GAME_STATUS_CHOICES' will generate in Django a drop-down list for the status field.
+
+    objects = GamesQuerySet.as_manager()
+    # This will return a Manager object that includes the functions from our custom QuerySet.
+    # We assign the manager to the 'objects' attribute of our Game class.
+    # This means that we are overriding the 'objects' attribute, which usually holds the default manager for our model.
+    # Now when we use Game.objects we have this option, for example: Game.objects.active()
 
     def __str__(self):
         return f"Game nr: {self.id}, {self.first_player} vs {self.second_player}"
