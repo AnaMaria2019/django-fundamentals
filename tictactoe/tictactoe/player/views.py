@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.views.generic import CreateView
+from django.contrib.auth.forms import UserCreationForm  # It's a form for creating users, which comes with Django.
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 from gameplay.models import Game
 from .forms import InvitationForm
@@ -74,3 +78,15 @@ def accept_invitation(request, id):
         # for the game_detail page).
     else:
         return render(request, 'player/accept_invitation_form.html', {'invitation': invitation})
+
+
+class SignUpView(CreateView):  # 'CreateView' is a generic class view that uses a form to create, validate and save
+    # new model objects.
+    form_class = UserCreationForm
+    template_name = "player/signup_form.html"
+    success_url = reverse_lazy('player_home')
+
+    """def form_valid(self, form):
+        data = form.cleaned_data
+        user = User.objects.create_user(username=data['username'], password=data['password1'])
+        return redirect('player_home') """

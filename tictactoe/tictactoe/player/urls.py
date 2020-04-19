@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout', LogoutView.as_view(), name='player_logout'),
     path('new_invitation', new_invitation, name='player_new_invitation'),
     path('accept_invitation/<int:id>', accept_invitation, name='player_accept_invitation'),
+    path('signup', SignUpView.as_view(), name='player_signup'),
 ]
 
 # Because 'LogoutView' is a class and not a function we need to call 'as_view' to convert it to a function.

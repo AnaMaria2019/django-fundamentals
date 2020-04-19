@@ -43,5 +43,5 @@ def make_move(request, id):
         return render(request, "gameplay/game_detail.html", {'game': game, 'form': form})
 
 
-class AllGamesList(ListView):
+class AllGamesList(ListView):  # 'ListView' is a generic class view which contains methods to interact with the db.
     model = Game
