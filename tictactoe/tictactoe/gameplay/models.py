@@ -11,6 +11,8 @@ GAME_STATUS_CHOICES = (
     ('D', 'Draw')
 )
 
+BOARD_SIZE = 3
+
 # A QuerySet represents a collection of objects from the database.
 # We create our own QuerySet which will also be able to call functions like 'filter', 'exclude' etc on it.
 
@@ -56,6 +58,15 @@ class Game(models.Model):
         # 'get_absolute_url' method. This method is used automatically in a 'redirect' function.
         # (See example in 'player/views' in the home view)
 
+    def board(self):
+        """Return a 2-dimensional list of Move objects, so you can ask for a state of square at position [y][x]."""
+        board = [[None for x in range(BOARD_SIZE)] for y in range(BOARD_SIZE)]
+
+        for move in self.move_set.all():
+            board[move.y][move.x] = move
+
+        return board
+
     def __str__(self):
         return f"Game nr: {self.id}, {self.first_player} vs {self.second_player}"
 
@@ -65,7 +76,9 @@ class Move(models.Model):
     y = models.IntegerField()
     comment = models.CharField(max_length=300, blank=True)  # By adding 'blank=True' we allow the user
     # to leave the comment field empty.
-    by_first_player = models.BooleanField()
+    by_first_player = models.BooleanField(editable=False)
+    # By adding 'editable=False' we say Django that we don't want this field to show up in a form
+    # (it has the same effect as if we put this field in the 'exclude' list in the MoveForm class).
 
     game = models.ForeignKey(Game, on_delete=models.CASCADE)  # A game has moore moves. (that means that the Game class
     # will have by default a move_set which contains all the moves. (this move_set is called 'a related manager'
