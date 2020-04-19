@@ -67,6 +67,9 @@ class Game(models.Model):
 
         return board
 
+    def is_users_move(self, user):
+        return (user == self.first_player and self.status == 'F') or (user == self.second_player and self.status == 'S')
+
     def __str__(self):
         return f"Game nr: {self.id}, {self.first_player} vs {self.second_player}"
 
@@ -80,6 +83,6 @@ class Move(models.Model):
     # By adding 'editable=False' we say Django that we don't want this field to show up in a form
     # (it has the same effect as if we put this field in the 'exclude' list in the MoveForm class).
 
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)  # A game has moore moves. (that means that the Game class
+    game = models.ForeignKey(Game, editable=False, on_delete=models.CASCADE)  # A game has moore moves. (that means that the Game class
     # will have by default a move_set which contains all the moves. (this move_set is called 'a related manager'
     # which works just like 'objects' manager (we can call g.move_set.all() for example where g is a Game object).
