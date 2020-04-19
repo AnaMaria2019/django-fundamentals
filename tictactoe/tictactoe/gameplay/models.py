@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Q
-
-# Create your models here.
+from django.urls import reverse
 
 GAME_STATUS_CHOICES = (
     ('F', 'First player to move'),
@@ -48,6 +47,14 @@ class Game(models.Model):
     # We assign the manager to the 'objects' attribute of our Game class.
     # This means that we are overriding the 'objects' attribute, which usually holds the default manager for our model.
     # Now when we use Game.objects we have this option, for example: Game.objects.active()
+
+    def get_absolute_url(self):
+        return reverse('game_detail', args=[self.id])
+        # This way we can return an url, by passing to the 'reverse' function the template name
+        # and which arguments the url takes. The 'reverse' function constructs an url mapping for the
+        # template given. When we retrieve a Game object from the database we can get its url too by calling
+        # 'get_absolute_url' method. This method is used automatically in a 'redirect' function.
+        # (See example in 'player/views' in the home view)
 
     def __str__(self):
         return f"Game nr: {self.id}, {self.first_player} vs {self.second_player}"

@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
-# Create your views here.
+from .models import Game
 
 
 def welcome(request):
@@ -9,3 +11,10 @@ def welcome(request):
         # In this case the url is '' located in 'player.urls'.
     else:
         return render(request, 'tictactoe/welcome.html')
+
+
+@login_required
+def game_detail(request, id):
+    game = get_object_or_404(Game, pk=id)
+
+    return render(request, 'gameplay/game_detail.html', {'game': game})

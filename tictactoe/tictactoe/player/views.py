@@ -67,7 +67,7 @@ def accept_invitation(request, id):
             )
 
         invitation.delete()
-        return redirect('player_home')
+        return redirect(game)
         # Because we have a 'get_absolute_url' method in the Game class we can call the 'redirect' function
         # directly on a Game object (explanation: Django uses the 'get_absolute_url' method to get the url
         # for the game_detail page).
