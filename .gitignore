@@ -1,0 +1,19 @@
+# Logs and databases #
+######################
+
+
+*.log
+*.sql
+*.sqlite3
+
+######################
+# Pycharm related    #
+######################
+
+.idea
+misc
+.xml
+*.iml
+*.pyc
+**/venv
+
