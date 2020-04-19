@@ -120,3 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# If we don't want to place a 'static' folder in each app directory that we create
+# we have to tell Django where to look for it. This is done in 'STATICFILES_DIRS'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]

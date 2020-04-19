@@ -1,13 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Home: {{ user.username }} {% endblock title %}
+
+{% block content %}
     <h1>Welcome, {{ user.username }} </h1> <!-- Django already makes the current user available in the template by adding it to the template context automatically. -->
     These are your active games:
     <ul>
@@ -15,5 +10,4 @@
             <li>Game {{ g.id }}: {{ g.first_player }} vs {{ g.second_player }}</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock content %}
