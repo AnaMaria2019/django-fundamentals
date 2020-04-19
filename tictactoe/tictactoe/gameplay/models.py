@@ -12,6 +12,9 @@ class Game(models.Model):
     last_active = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, default='F')
 
+    def __str__(self):
+        return f"Game nr: {self.id}, {self.first_player} vs {self.second_player}"
+
 
 class Move(models.Model):
     x = models.IntegerField()
