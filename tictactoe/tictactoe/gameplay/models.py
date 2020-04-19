@@ -14,6 +14,11 @@ GAME_STATUS_CHOICES = (
 
 class Game(models.Model):
     # 'related_name' specifies the name of the reverse relation from the 'User' model back to the 'Game' model.
+    # When accessing Game.objects.filter(second_player__username='ana') for example we will get a queryset of Game
+    # objects where the second_player is the user with the username 'ana' ('second_player' and 'first_player'
+    # fields point to a record in the users table, meaning that these fields are not simple values, they represent
+    # different objects stored in a different table). We look up all the games where the username field of that record
+    # in the users table equals 'ana' (ForeignKey means a One to Many relationship).
     first_player = models.ForeignKey(User, related_name="games_first_player", on_delete=models.CASCADE)  # Django comes with a default User class.
     second_player = models.ForeignKey(User, related_name="games_second_player", on_delete=models.CASCADE)  # A user can play more games.
     start_time = models.DateTimeField(auto_now_add=True)
