@@ -19,3 +19,6 @@ After creating the Pycharm project, to create a Django project follow these step
 
 --------------------------------------------------------------------------------------------------------------
 The 'css', 'js', 'fonts' directories within the 'static' directory are copied from the course resources available on the course's page on PluralSight. I did not downloaded the up-to-date versions in order to have the same code as in the course working.
+
+--------------------------------------------------------------------------------------------------------------
+For a better looking of the forms in the application we install 'django-crispy-forms' by typing the following command in the terminal: 'pip install django-crispy-forms'.

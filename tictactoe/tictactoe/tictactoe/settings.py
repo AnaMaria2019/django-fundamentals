@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gameplay',
     'player',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,8 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = 'player_home'
 LOGOUT_REDIRECT_URL = 'tictactoe_welcome'
 LOGIN_URL = 'player_login'
+
+
+# For the styling of the forms with django-crispy-forms we need to specify which version of
+# bootstrap to use. In this case, in the course it's used bootstrap 3.
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
