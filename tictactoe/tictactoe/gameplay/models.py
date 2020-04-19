@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+GAME_STATUS_CHOICES = (
+    ('F', 'First player to move'),
+    ('S', 'Second player to move'),
+    ('W', 'First player wins'),
+    ('L', 'Second player wins'),
+    ('D', 'Draw')
+)
+
 
 class Game(models.Model):
     # 'related_name' specifies the name of the reverse relation from the 'User' model back to the 'Game' model.
@@ -10,7 +18,8 @@ class Game(models.Model):
     second_player = models.ForeignKey(User, related_name="games_second_player", on_delete=models.CASCADE)  # A user can play more games.
     start_time = models.DateTimeField(auto_now_add=True)
     last_active = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=1, default='F')
+    status = models.CharField(max_length=1, default='F', choices=GAME_STATUS_CHOICES)
+    # 'choices = GAME_STATUS_CHOICES' will generate in Django a drop-down list for the status field.
 
     def __str__(self):
         return f"Game nr: {self.id}, {self.first_player} vs {self.second_player}"
