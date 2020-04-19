@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+    <form role="form" action="{% url 'player_login' %}" method="post">
+        {% csrf_token %} <!-- This is used for security. The form will not work without this tag inside it. -->
+
+        <p>Please login.</p>
+
+        {{ form }}
+
+        <button type="submit" class="btn btn-success"> Sign in </button>
+    </form>
+{% endblock content %}

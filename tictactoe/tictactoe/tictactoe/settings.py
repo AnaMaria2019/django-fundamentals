@@ -126,3 +126,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+
+# We need to tell Django where to redirect a successfully log in/log out user.
+LOGIN_REDIRECT_URL = 'player_home'
+LOGOUT_REDIRECT_URL = 'tictactoe_welcome'
+LOGIN_URL = 'player_login'

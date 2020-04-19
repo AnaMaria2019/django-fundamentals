@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from gameplay.models import Game
 
-# Create your views here.
+# With the '@login_required' attached only the logged in users will be able to access the 'home' view.
+# If you are not logged in you are redirected to the 'LOGIN_URL' configured in 'settings.py'.
 
 
+@login_required
 def home(request):
     """
     games_first_player = Game.objects.filter(
