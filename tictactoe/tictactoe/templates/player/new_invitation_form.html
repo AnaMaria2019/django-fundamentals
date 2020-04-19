@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}New Invitation{% endblock title %}
+
+{% block content %}
+    <form method="post" action="{% url 'player_new_invitation' %}">
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit"> Send invitation </button>
+    </form>
+{% endblock content %}
