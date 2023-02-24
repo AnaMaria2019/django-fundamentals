@@ -7,7 +7,7 @@ You can find the instructor's code for this project on the [course's page on Plu
 ## Getting Started
 
 Follow all the steps below if you want to get this project up and running on your computer.
-> **Note**
+> **Note**</br>
 > The 'css', 'js', 'fonts' directories within the 'static' directory are copied from the course resources available on the course's page
 on PluralSight. I did not downloaded the up-to-date versions in order to have the same code as in the course working.
 
@@ -31,5 +31,10 @@ styling of the pages that contain forms
 `pip install -r requirements.txt`
 7. Migrate the migrations that are already present in the project:</br>
 `python manage.py migrate`
-8. Run the Django server :)</br>
+8. Run the Django server</br>
 `python manage.py runserver`
+9. Create a few users and start playing tictactoe
+> **Note**</br>
+> You have to create at least 2 users in order to be able to start a game and also while testing how the platform works,
+after the current user makes a move, you will need to switch to the other user that you're playing with and make a move
+for him.
