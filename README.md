@@ -27,7 +27,7 @@ on PluralSight. I did not downloaded the up-to-date versions in order to have th
 `python -m venv <name_of_the_venv>`</br>
 `<name_of_the_venv>\Scripts\activate` - this works only for Windows
 6. Install the necessary packages mentioned in the <i>requirements.txt</i> file;</br> in this case: <i>Django</i>, <i>django-crispy-forms</i> - helps with the
-styling of the pages that contain forms
+styling of the pages that contain forms</br>
 `pip install -r requirements.txt`
 7. Migrate the migrations that are already present in the project:</br>
 `python manage.py migrate`
